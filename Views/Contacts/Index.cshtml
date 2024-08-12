@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ContactFormApp.Models.Contact>
+
+@{
+    ViewData["Title"] = "Contacts";
+}
+
+<h1>Contacts</h1>
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Create")">Create New</a>
+</p>
+@if (ViewBag.Message != null)
+{
+    <p class="text-warning">@ViewBag.Message</p>
+}
+else{
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contact in Model)
+        {
+            <tr>
+                <td>@contact.FirstName @contact.LastName</td>
+                <td>@contact.Email</td>
+                <td>@contact.PhoneNumber</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = contact.Id })">Edit</a> |
+                    <a href="@Url.Action("Delete", new { id = contact.Id })">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
